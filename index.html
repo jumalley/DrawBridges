@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draw Bridges</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    body {
+      font-family: 'ocr-a-std', monospace;
+      font-weight: 400;
+      font-style: normal;
+      text-align: center;
+      margin: 20px auto;
+      background-color: #0D0208;
+      color: #003B00;
+    }
+    h1 {
+      font-weight: bold;
+    }
+    .container {
+      background-color: #0D0208;
+      max-width: 350px;
+      margin: 0 auto;
+      padding: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+    .button {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #003B00;
+      color: #0D0208;
+      transition: background-color 0.3s;
+      width: 100%;
+      max-width: 280px;
+    }
+    .button b {
+      font-weight: bold;
+    }
+    .button:hover {
+      background-color: #002E00;
+    }
+    .icon {
+      margin-right: 10px;
+    }
+    header {
+      background-color: #0D0208;
+      padding: 10px;
+      border-bottom: 2px solid #003B00;
+    }
+    h1 {
+      color: #003B00;
+      margin: 0;
+      font-size: 24px;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 2px solid #003B00; /* Line at the bottom */
+    }
+    .navbarButton {
+      flex-grow: 1;
+      background: none;
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: 15px; /* Increased padding for bigger buttons */
+      box-shadow: none;
+      border-radius: 8px;
+      font-size: 20px; /* Increased font size for bigger buttons */
+      transition: background-color 0.3s;
+      cursor: pointer;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .navbarIcon {
+      border-radius: 8px;
+      padding: 10px; /* Adjusted padding for better spacing */
+      cursor: pointer;
+    }
+    .navbarIcon:hover {
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="lightsPage">
+    <header>
+      <h1>Draw Bridges - Lights</h1>
+    </header>
+    <!-- Lights Button -->
+    <button class="button" id="lightsButton" onclick="toggleLights()">
+      <i class="icon fas fa-sun"></i> <b><span class="buttonText">Lights On</span></b>
+      <div class="buttonDescription">Toggle the lights on the bridge</div>
+    </button>
+    <!-- Navbar -->
+    <div class="navbar">
+      <button class="navbarButton" onclick="showLightsPage()">
+        <span>Lights</span>
+      </button>
+      <div style="width: 10px;"></div> <!-- Spacer -->
+      <button class="navbarButton" onclick="showUpDownPage()">
+        <span>Up/Down</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container" id="upDownPage" style="display: none;">
+    <header>
+      <h1>Draw Bridges - Up/Down</h1>
+    </header>
+    <!-- Up/Down Button -->
+    <button class="button" id="upDownButton" onclick="toggleUpDown()">
+      <i class="icon fas fa-arrow-up"></i> <b><span class="buttonText">Move Up</span></b>
+      <div class="buttonDescription">Move the bridge up or down</div>
+    </button>
+    <!-- Navbar -->
+    <div class="navbar">
+      <button class="navbarButton" onclick="showLightsPage()">
+        <span>Lights</span>
+      </button>
+      <div style="width: 10px;"></div> <!-- Spacer -->
+      <button class="navbarButton" onclick="showUpDownPage()">
+        <span>Up/Down</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Variable to track the lights state
+    var lightsState = true;
+
+    // Function to toggle Lights
+    function toggleLights() {
+      // Toggle lights state
+      lightsState = !lightsState;
+
+      // Update button icon and text based on lights state
+      var lightsButton = document.getElementById('lightsButton');
+      if (lightsButton) {
+        var iconElement = lightsButton.querySelector('.icon');
+        var buttonTextElement = lightsButton.querySelector('.buttonText');
+
+        if (lightsState) {
+          // Lights are on
+          iconElement.className = 'icon fas fa-sun';
+          buttonTextElement.textContent = 'Lights On';
+        } else {
+          // Lights are off
+          iconElement.className = 'icon fas fa-moon';
+          buttonTextElement.textContent = 'Lights Off';
+        }
+      }
+      // Call your function for toggling lights here
+      // For example: toggleBridgeLights();
+    }
+
+    // Variable to track the up/down state
+    var upDownState = true; // Set to true for the initial state (bridge is up)
+
+    // Function to toggle Up/Down
+    function toggleUpDown() {
+      // Toggle up/down state
+      upDownState = !upDownState;
+
+      // Update button icon and text based on up/down state
+      var upDownButton = document.getElementById('upDownButton');
+      if (upDownButton) {
+        var iconElement = upDownButton.querySelector('.icon');
+        var buttonTextElement = upDownButton.querySelector('.buttonText');
+
+        if (upDownState) {
+          // Bridge is moving up
+          iconElement.className = 'icon fas fa-arrow-up';
+          buttonTextElement.textContent = 'Move Up';
+        } else {
+          // Bridge is moving down
+          iconElement.className = 'icon fas fa-arrow-down';
+          buttonTextElement.textContent = 'Move Down';
+        }
+      }
+
+      // Call your function for toggling up/down here
+      // For example: toggleBridgeUpDown();
+    }
+
+    // Function to show Up/Down page
+    function showUpDownPage() {
+      document.getElementById('lightsPage').style.display = 'none';
+      document.getElementById('upDownPage').style.display = 'block';
+    }
+
+    // Function to show Lights page
+    function showLightsPage() {
+      document.getElementById('upDownPage').style.display = 'none';
+      document.getElementById('lightsPage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
